@@ -66,8 +66,8 @@ public class TOHTower : MonoBehaviour {
         if (IsCorrect) {
             if(Tower.Count == 4) {
                 Debug.Log("Correct");
-                Zombie.CurrentProfileStats.Stats["Stack"]["Towers of Hanoi"].GameLog.Add(Log);
                 WinGame.Show();
+                Zombie.CurrentProfileStats.Stats["Stack"]["Towers of Hanoi"].GameLog.Add(Log);
             }
         }
     }
