@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2019,7 +2019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2174,7 +2174,7 @@ PrefabInstance:
     - target: {fileID: 9156157195482143090, guid: 4ffed53f5a2bdc84bb14c2059afe9035, type: 3}
       propertyPath: newTrack
       value: 
-      objectReference: {fileID: 8300000, guid: 990781ffcb5ce064aa6f419ec94afd20, type: 3}
+      objectReference: {fileID: 8300000, guid: a9aa406066dac6d4a989a78b55b1d868, type: 3}
     - target: {fileID: 9156157195482143091, guid: 4ffed53f5a2bdc84bb14c2059afe9035, type: 3}
       propertyPath: m_Name
       value: NewMusic
@@ -2276,7 +2276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
