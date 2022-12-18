@@ -48,7 +48,7 @@ public class SetController : MonoBehaviour {
         PlayerInput.onEndEdit.AddListener(delegate {
             PlayerMove();
         });
-        PlayerInput.Select();
+        PlayerInput.enabled = true;
     }
 
     void PlayerMove() {
@@ -74,14 +74,14 @@ public class SetController : MonoBehaviour {
                 PlayerSet.text = Last5;
 
                 Debug.Log($"Legal {PlayerInput.text}");
-                PlayerInput.Select();
+                PlayerInput.enabled = true;
             }
         } else {
             Log.ErrorsMade++;
             Debug.Log($"Illegal {PlayerInput.text}");
-            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
             Loss.Show();
             CountDown.StopTimer();
+            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
         }
         float RNG = Random.value;
         if (RNG >= RobbieDifficulty) {
@@ -108,15 +108,14 @@ public class SetController : MonoBehaviour {
 
     private void Update() {
         if(Input.GetKey(KeyCode.Return) && RobbieFinished) {
+            RobbieTalk.text = "";
             RobbieFinished = false;
             RobbieTalk.transform.parent.gameObject.SetActive(false);
-            RobbieTalk.text = "";
             RobbieSpeak.enabled = false;
             RobbieSpeak.gameObject.GetComponent<Image>().sprite = Robbie_Inactive;
             
             PlayerInput.text = "";
             PlayerInput.enabled = true;
-            PlayerInput.Select();
         }
     }
 
@@ -129,8 +128,9 @@ public class SetController : MonoBehaviour {
         foreach (char C in Word.ToCharArray()) {
             RobbieTalk.text += C;
             yield return new WaitForSeconds(.1f);
-            RobbieFinished = true;
         }
+        RobbieFinished = true;
+        PlayerInput.enabled = true;
     }
 
 }
