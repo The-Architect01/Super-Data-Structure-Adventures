@@ -89,8 +89,8 @@ Queue[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(
             Answer += item.GetComponent<Text>().text + "\n";
         }
         if(Answer.Replace("\n",string.Empty) == Correct.text.Replace("\n",string.Empty)) {
-            Zombie.CurrentProfileStats.Stats["Queue"]["Manic Menus"].GameLog.Add(Log);
             WinGame.Show();
+            Zombie.CurrentProfileStats.Stats["Queue"]["Manic Menus"].GameLog.Add(Log);
         }
     }
 
