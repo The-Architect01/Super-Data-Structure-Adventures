@@ -65,8 +65,11 @@ public class ButtonGenerator : MonoBehaviour
             newButton.GetComponent<RectTransform>().sizeDelta = new Vector2(width, width / 5);
 
             // Set up the selection and callback for the button
-            newButton.GetComponent<SelectionButtonScript>().selectionData = opt;
-            newButton.GetComponent<SelectionButtonScript>().callback = callback;
+//            newButton.GetComponent<SelectionButtonScript>().selectionData = opt;
+//            newButton.GetComponent<SelectionButtonScript>().callback = callback;
+
+            newButton.GetComponent<SnapPreset>().Name.text = opt;
+            newButton.GetComponent<SnapPreset>().Snap.sprite = Resources.Load<Sprite>($"Minigame Snaps/{opt}");
 
             // Update the position for the next button
             position = new Vector3(0, position.y - delta, 0);
