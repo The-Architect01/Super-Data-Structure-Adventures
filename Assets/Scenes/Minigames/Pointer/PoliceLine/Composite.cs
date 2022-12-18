@@ -1,7 +1,6 @@
-//Written by The-Architect01
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Composite : MonoBehaviour {
 
@@ -11,8 +10,8 @@ public class Composite : MonoBehaviour {
     public Image Nose;
     public Image Mouth;
 
-    public TextMeshProUGUI Name;
-    public TextMeshProUGUI Number;
+    public Text Name;
+    public Text Number;
 
     public bool IsCorrect = false;
 

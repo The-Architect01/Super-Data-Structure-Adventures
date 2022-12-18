@@ -1,14 +1,14 @@
-//Written by The-Architect01
+
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class QueueHost : MonoBehaviour
 {
     public List<QueueItem> Queue = new List<QueueItem>();
     public static int TurnsTaken = 0;
     public GameWin WinGame;
-    public TextMeshProUGUI Correct;
+    public Text Correct;
 
     GameLogging.Log Log;
 
@@ -26,7 +26,7 @@ public class QueueHost : MonoBehaviour
         try {
             int i = 0;
             foreach(QueueItem Item in Queue) {
-                Item.GetComponent<TextMeshProUGUI>().text = Foods[i];
+                Item.GetComponent<Text>().text = Foods[i];
                 i++;
             }
         } catch { }
@@ -86,7 +86,7 @@ Queue[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(
     void Check() {
         string Answer = "";
         foreach(QueueItem item in Queue) {
-            Answer += item.GetComponent<TextMeshProUGUI>().text + "\n";
+            Answer += item.GetComponent<Text>().text + "\n";
         }
         if(Answer.Replace("\n",string.Empty) == Correct.text.Replace("\n",string.Empty)) {
             Zombie.CurrentProfileStats.Stats["Queue"]["Manic Menus"].GameLog.Add(Log);

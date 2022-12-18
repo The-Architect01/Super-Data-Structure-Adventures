@@ -1,15 +1,13 @@
-//Written by The-Architect01
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameLoss : MonoBehaviour
-{
+public class GameLoss : MonoBehaviour {
     #region Public Variables
     public Image Screen;
-    public TextMeshProUGUI Loss;
-    public TextMeshProUGUI LossText;
+    public Text Loss;
+    public Text LossText;
 
     public Button Retry;
     public Button Next;

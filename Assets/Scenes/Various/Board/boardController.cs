@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
-public class boardController : MonoBehaviour
-{
+public class boardController : MonoBehaviour {
     //2 lists, one for players still in the game, one for the losers! :D
     public GameObject Incog;
     public GameObject Debugger;
@@ -19,8 +18,8 @@ public class boardController : MonoBehaviour
     int elimCnt; // minigames will happen on ever xth turn
     int numPlayers;
     bool eliminationRound = false;
-    public TextMeshProUGUI bitCoin;
-    public TextMeshProUGUI centralText;
+    public Text bitCoin;
+    public Text centralText;
     
 
     void Start()

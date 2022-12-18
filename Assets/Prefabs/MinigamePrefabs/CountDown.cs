@@ -1,6 +1,5 @@
-//Written by The-Architect01
+
 using UnityEngine;
-using TMPro;
 
 public class CountDown : Timer
 {

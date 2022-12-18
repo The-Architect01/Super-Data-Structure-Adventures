@@ -1,13 +1,11 @@
-//Written by The-Architect01
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-    /// <summary><c>TextMeshProUGUI</c> the label that will dynamically update.</summary>
-    public TextMeshProUGUI TimerLabel;
+
+    public Text TimerLabel;
     public bool AutoRun;
 
-    // Start is called before the first frame update
     void Start() {
         TimerLabel.text = "00:00.000";
         if (AutoRun) { running = true; }
@@ -18,8 +16,7 @@ public class Timer : MonoBehaviour {
 
     public void StopTimer() { running = false; }
     public void StartTimer() { running = true; }
-    // Update is called once per frame
-    /// <summary>Updates the timer element.</summary>
+
     protected virtual void Update() {
         if (running) {
             try {

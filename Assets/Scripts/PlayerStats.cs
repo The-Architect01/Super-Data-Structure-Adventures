@@ -1,4 +1,4 @@
-//Written by The-Architect01
+
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -12,10 +12,10 @@ public class PlayerStats {
     public Dictionary<string, Dictionary<string, Stat>> Stats { get; private set; }
 
     public PlayerStats() {
-        /*try {
+        try {
             Stats = PlayerIO.LoadData().Stats;
             Debug.Log("Player history detected");
-        } catch (NoSaveFileException) {*/
+        } catch (NoSaveFileException) {
             MiniGameLister MGL = Zombie.MiniGameList;
             Stats = new Dictionary<string, Dictionary<string, Stat>>();
             foreach(string Category in MGL.GetListofCategories()) {
@@ -27,7 +27,7 @@ public class PlayerStats {
             }        
             PlayerIO.SaveData(this);
             Debug.Log("New Player Record Created");
-        //}
+        }
     }
 
 }
@@ -80,9 +80,13 @@ namespace GameLogging {
         public float TimeTaken { get; set; } = -1;
         public bool IsTeamGame { get; set; } = false;
         public bool IsPractice { get; set; } = false;
+        public Difficulty Difficulty { get; set; } = Difficulty.Normal;
         public bool Win { get; set; } = false;
     }
 }
+
+[Serializable]
+public enum Difficulty { Easy, Normal, Hard, Expert }
 
 public static class PlayerIO {
 

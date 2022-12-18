@@ -1,14 +1,14 @@
-//Written by The-Architect01
+
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class TOHTower : MonoBehaviour {
 
     public List<TowerPart> Tower = new List<TowerPart>();
     public bool IsCorrect;
     public static int TurnsTaken = 0;
-    public TextMeshProUGUI TurnsTakenDisplay;
+    public Text TurnsTakenDisplay;
     public GameWin WinGame;
 
     GameLogging.Log Log;

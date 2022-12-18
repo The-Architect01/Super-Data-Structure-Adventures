@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using GameLogging;
 using UnityEngine.UI;
 
@@ -11,13 +10,13 @@ public class DOAController : MonoBehaviour
     public GameLoss GameLoss;
     public CountDown CountDown;
 
-    public TMP_InputField Row;
-    public TMP_InputField Col;
+    public InputField Row;
+    public InputField Col;
     public Button SubmitButton;
 
-    public TextMeshProUGUI ErrorMessage;
+    public Text ErrorMessage;
 
-    public TextMeshProUGUI[] People;
+    public Text[] People;
 
     public Text TVDisplay;
 
@@ -84,7 +83,7 @@ public class DOAController : MonoBehaviour
             Row.text = "";
             Row.Select();
             Log.TurnsUsed++;
-            foreach (TextMeshProUGUI person in People) {
+            foreach (Text person in People) {
                 if (person.name == Coord) {
                     if (person.text == TVDisplay.text) {
                         person.gameObject.transform.parent.gameObject.SetActive(false);

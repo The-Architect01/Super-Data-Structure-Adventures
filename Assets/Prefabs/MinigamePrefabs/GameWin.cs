@@ -1,16 +1,14 @@
-//Written by The-Architect01
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameWin : MonoBehaviour
-{
+public class GameWin : MonoBehaviour {
     #region Public Variables
     public Timer Timer;
     public Image Screen;
-    public TextMeshProUGUI TimeWin;
-    public TextMeshProUGUI Win;
+    public Text TimeWin;
+    public Text Win;
 
     public Button Retry;
     public Button Next;

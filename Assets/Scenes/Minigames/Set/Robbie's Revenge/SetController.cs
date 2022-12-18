@@ -1,8 +1,7 @@
-﻿//Written by The-Architect01
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
@@ -11,12 +10,12 @@ public class SetController : MonoBehaviour {
 
     public float RobbieDifficulty = .1f;
 
-    public TMP_InputField PlayerInput;
-    public TextMeshProUGUI SetType;
-    public TextMeshProUGUI PlayerSet;
+    public InputField PlayerInput;
+    public Text SetType;
+    public Text PlayerSet;
 
     public Animator RobbieSpeak;
-    public TextMeshProUGUI RobbieTalk;
+    public Text RobbieTalk;
     bool RobbieFinished = false;
     public Sprite Robbie_Inactive;
 

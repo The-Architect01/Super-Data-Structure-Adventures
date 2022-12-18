@@ -1,7 +1,6 @@
-//Written by The-Architect01
+
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -11,17 +10,17 @@ public class LoadScreen : MonoBehaviour {
     /// <summary><c>string</c> Stores the minigame to be loaded.</summary>
     public string MiniGame;
     /// <summary><c>TextMeshProUGUI</c> The label that will display the minigame's name.</summary>
-    public TextMeshProUGUI GameName;
+    public Text GameName;
     /// <summary><c>TextMeshProUGUI</c> The label that will display how the minigame relates to the actual data structure.</summary>
-    public TextMeshProUGUI DataStructure;
+    public Text DataStructure;
     /// <summary><c>TextMeshProUGUI</c> The label that will display how the minigame will play in relation to actual data structures.</summary>
-    public TextMeshProUGUI HowTo;
+    public Text HowTo;
     /// <summary><c>TMP_InputField</c> The user input that will display a team name. It also allows the user to input their own legal team name.</summary>
-    public TMP_InputField TeamName;
+    public InputField TeamName;
     /// <summary><c>Button</c> The button that will transition and load the minigame. In multiplayer situations, it will send the <c>ready</c> message.</summary>
     public Button ReadyButton;
     /// <summary><c>TextMeshProUGUI</c> The label that will display the error message</summary>
-    public TextMeshProUGUI ErrorText;
+    public Text ErrorText;
     /// <summary><c>Image</c> The image that will display the controls used in the minigame.</summary>
     public Image HowToPlay;
     /// <summary><c>Image</c> The image that will display a sneak peek of the minigame being played.</summary>

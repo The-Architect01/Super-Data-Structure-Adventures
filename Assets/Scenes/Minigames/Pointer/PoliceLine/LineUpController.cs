@@ -1,7 +1,6 @@
-//Written by The-Architect01
+
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using GameLogging;
 using System.Collections.Generic;
 
@@ -17,7 +16,7 @@ public class LineUpController : MonoBehaviour {
     public Composite[] Charges;
 
     public Face.Shape[] CorrectFace;
-    public TextMeshProUGUI Characteristics;
+    public Text Characteristics;
 
     public Log GameLog;
     

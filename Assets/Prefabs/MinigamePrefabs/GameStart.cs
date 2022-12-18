@@ -1,14 +1,13 @@
-//Written by The-Architect01
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class GameStart : MonoBehaviour{
     public Image Display;
-    public TextMeshProUGUI Title;
-    public TextMeshProUGUI CountDown;
+    public Text Title;
+    public Text CountDown;
     public int CountDownDuration = 4;
     public Timer Timer;
 

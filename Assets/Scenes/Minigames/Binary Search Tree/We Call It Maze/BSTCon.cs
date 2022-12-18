@@ -1,18 +1,17 @@
-//Written by The-Architect01
+
 using BinaryTree;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Linq;
 
 public class BSTCon : MonoBehaviour {
 
-    public TextMeshProUGUI LeftText;
-    public TextMeshProUGUI RightText;
-    public TextMeshProUGUI CurrentText;
-    public TextMeshProUGUI GoalText;
-    public TextMeshProUGUI MovesUsed;
+    public Text LeftText;
+    public Text RightText;
+    public Text CurrentText;
+    public Text GoalText;
+    public Text MovesUsed;
     public GameWin GameWin;
     public static BinaryTree<string> BinTree;
     public static string Goal;
