@@ -4,8 +4,8 @@ using UnityEngine;
 using GameLogging;
 using UnityEngine.UI;
 
-public class DOAController : MonoBehaviour
-{
+public class DOAController : MonoBehaviour {
+
     public GameWin GameWin;
     public GameLoss GameLoss;
     public CountDown CountDown;
@@ -96,8 +96,8 @@ public class DOAController : MonoBehaviour
                         }
                         return;
                     } else {
-                        Debug.Log(Errors.Invalid_Input);
-                        UpdateError(Errors.Invalid_Input);
+                        Debug.Log(Errors.Not_Correct);
+                        UpdateError(Errors.Not_Correct);
                         return;
                     }
                 }
@@ -117,16 +117,16 @@ public class DOAController : MonoBehaviour
 
     void UpdateError(Errors error) {
         ErrorMessage.gameObject.SetActive(error != Errors.None);
-        ErrorMessage.text = "Error " + error.ToString().Replace('_', ' ');
+        ErrorMessage.text = "Error: " + error.ToString().Replace('_', ' ');
     }
  
     enum Errors {
         None,
-        Invalid_Input,
         No_Input,
         Not_Found,
         Not_Correct,
-        Over
+        Invalid_Input,
+        Other
     }
 
 }
