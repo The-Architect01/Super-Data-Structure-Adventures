@@ -36,7 +36,7 @@ public class PauseScreen : MonoBehaviour {
         });
         MainMenu.onClick.AddListener(delegate {
             Debug.Log("Main Menu Clicked");
-            SceneManager.LoadScene("SPCategoryMenu");
+            SceneManager.LoadScene("Practice");
         });
     }
 
