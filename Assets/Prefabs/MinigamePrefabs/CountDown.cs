@@ -26,7 +26,8 @@ public class CountDown : Timer
             try {
                 Time -= UnityEngine.Time.deltaTime;
                 TimeElapsed += UnityEngine.Time.deltaTime;
-                if(Time <= 0) { 
+                if(Time <= 0) {
+                    GameLoss.Message = "Time's Up!";
                     GameLoss.Show();
                     TimeElapsed = NumberOfSeconds - Time;
                     TimerLabel.text = "00:00.000";

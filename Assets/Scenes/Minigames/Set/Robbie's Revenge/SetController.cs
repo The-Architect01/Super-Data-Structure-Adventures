@@ -49,6 +49,7 @@ public class SetController : MonoBehaviour {
             PlayerMove();
         });
         PlayerInput.enabled = true;
+        Loss.Message = "That's Incorrect!";
     }
 
     void PlayerMove() {
@@ -59,8 +60,8 @@ public class SetController : MonoBehaviour {
         
         if (Location != -1) {
             if (Player.Add(LegalOptions.ElementAt(Location))) {
-                LegalOptions.Remove(LegalOptions.ElementAt(Location));
                 IllegalOptions.Add(LegalOptions.ElementAt(Location));
+                LegalOptions.Remove(LegalOptions.ElementAt(Location));
 
                 string Last5 = "";
                 for (int i = 1; i <= 5; i++) {
@@ -100,9 +101,9 @@ public class SetController : MonoBehaviour {
             int RandomIndex = Random.Range(0, IllegalOptions.Count-1);
             StartCoroutine(RobbieSpeaking(IllegalOptions.ElementAt(RandomIndex)));
             Debug.Log($"Illegal {IllegalOptions.ElementAt(RandomIndex)}");
-            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
             Win.Show();
             CountDown.StopTimer();
+            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
         }
     }
 
