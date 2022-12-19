@@ -4497,6 +4497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Source
       objectReference: {fileID: 0}
+    - target: {fileID: 5650598318698420094, guid: eb3cfb3f417012546a909702cb233d6f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7039e48246ea41d4a8b70802bade4d7e, type: 3}
     - target: {fileID: 5650598318698420095, guid: eb3cfb3f417012546a909702cb233d6f, type: 3}
       propertyPath: m_RootOrder
       value: 3
