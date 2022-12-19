@@ -6,25 +6,27 @@ using UnityEngine.UI;
 
 public class DOAController : MonoBehaviour {
 
+    [Header("Engine Controllers")]
     public GameWin GameWin;
     public GameLoss GameLoss;
     public CountDown CountDown;
+    public MinigameDifficultyModifier MDM;
+    Log Log;
 
+    [Header("Game Input")]
     public InputField Row;
     public InputField Col;
     public Button SubmitButton;
 
+    [Header("Text Displays")]
     public Text ErrorMessage;
-
     public Text[] People;
-
     public Text TVDisplay;
 
+    [Header("Internal Data")]
     HashSet<int> _numbers = new HashSet<int>();
     int[] Numbers;
     Queue<int> NumberQueue = new Queue<int>();
-
-    Log Log;
 
     private void Awake() {
         Row.Select();
@@ -118,6 +120,7 @@ public class DOAController : MonoBehaviour {
     void UpdateError(Errors error) {
         ErrorMessage.gameObject.SetActive(error != Errors.None);
         ErrorMessage.text = "Error: " + error.ToString().Replace('_', ' ');
+        if(error != Errors.No_Input && error != Errors.None) MDM.RegisterError();
     }
  
     enum Errors {

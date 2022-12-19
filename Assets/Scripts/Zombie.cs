@@ -22,7 +22,7 @@ public class Zombie : MonoBehaviour {
     public static DiscordController DiscordController { get; private set; }
     public static PlayerStats CurrentProfileStats { get; private set; }
     public static MiniGameLister MiniGameList { get; private set; }
-
+    public static Difficulty Difficulty { get; set; } = Difficulty.Normal;
     private void Awake() { 
         if (!created) {
             // Application.quitting += Quitting;

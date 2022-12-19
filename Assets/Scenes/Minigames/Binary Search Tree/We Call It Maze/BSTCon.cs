@@ -16,6 +16,7 @@ public class BSTCon : MonoBehaviour {
     public static BinaryTree<string> BinTree;
     public static string Goal;
     public CountDown Timer;
+    public MinigameDifficultyModifier MDM;
 
     static int _moves;
     int Moves { get { return _moves; } set { _moves = value; MovesUsed.text = $"Moves Used: {value}"; } }
@@ -82,8 +83,10 @@ public class BSTCon : MonoBehaviour {
                 Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
                 return;
             }
-            if(CurrentNode.Right != null)
+            if (CurrentNode.Right != null)
                 CurrentNode = CurrentNode.Right;
+            else
+                MDM.RegisterError();
         } else if(Direction == Direction.Left) {
             if (LeftText.text == Goal.ToString()) {
                 Debug.Log("Correct Left"); 
@@ -94,6 +97,8 @@ public class BSTCon : MonoBehaviour {
             }
             if (CurrentNode.Left != null)
                 CurrentNode = CurrentNode.Left;
+            else
+                MDM.RegisterError();
         } else if(Direction == Direction.Center) {
             if (CurrentText.text == Goal.ToString()) { 
                 Debug.Log("Correct Center"); 
@@ -104,6 +109,8 @@ public class BSTCon : MonoBehaviour {
             }
             if (CurrentNode.Parent != null) 
                 CurrentNode = CurrentNode.Parent;
+            else
+                MDM.RegisterError();
         }
         CurrentText.text = CurrentNode.Data.ToString();
         try {

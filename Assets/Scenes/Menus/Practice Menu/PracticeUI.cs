@@ -32,6 +32,7 @@ public class PracticeUI : MonoBehaviour {
         Difficulty d = (Difficulty)DifficultySlider.value;
         DifficultyText.text = DifficultyDesc[d];
         DifficultyHeader.text = $"Difficulty: {d}";
+        Zombie.Difficulty = d;
     }
 
     public void OnCatChange() {
@@ -40,4 +41,6 @@ public class PracticeUI : MonoBehaviour {
             snapPreset.gameObject.SetActive(Zombie.MiniGameList.GetCategoryFromSceneName(snapPreset.Name.text) == FilterDropDown.options[FilterDropDown.value].text);
         }
     }
+
+   
 }

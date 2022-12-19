@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QueueHost : MonoBehaviour
-{
+public class QueueHost : MonoBehaviour {
+
     public List<QueueItem> Queue = new List<QueueItem>();
     public static int TurnsTaken = 0;
     public GameWin WinGame;
     public Text Correct;
 
+    public MinigameDifficultyModifier MDM;
     GameLogging.Log Log;
 
     private void Start() {
@@ -55,7 +56,7 @@ public class QueueHost : MonoBehaviour
             for (int i = 0; i < QueueItem.Selected.Host.Queue.Count; i++) {
                 QueueItem.Selected.Host.Queue[i].IsSelectable = i == 0;
             }
-        } catch { Debug.Log("Empty Tower"); }
+        } catch { Debug.Log("Empty Tower"); MDM.RegisterError(); }
 
         QueueItem.Selected.LastLegalLocation = QueueItem.Selected.GetComponent<RectTransform>().anchoredPosition = new Vector3(
             GetComponent<RectTransform>().anchoredPosition.x + 25, 
@@ -79,7 +80,7 @@ Queue[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(
                     0
                 );
             }
-        } catch { Debug.Log("Empty Tower"); }
+        } catch { Debug.Log("Empty Tower"); MDM.RegisterError(); }
     }
 
 

@@ -8,26 +8,31 @@ using System.Text.RegularExpressions;
 
 public class SetController : MonoBehaviour {
 
+    [Header("Engine Data")]
     public float RobbieDifficulty = .1f;
+    public GameLoss Loss;
+    public GameWin Win;
+    public CountDown CountDown;
+    GameLogging.Log Log;
+    public MinigameDifficultyModifier MDM;
 
+    [Header("User Input")]
     public InputField PlayerInput;
     public Text SetType;
     public Text PlayerSet;
 
+    [Header("Robbie")]
     public Animator RobbieSpeak;
     public Text RobbieTalk;
     bool RobbieFinished = false;
     public Sprite Robbie_Inactive;
 
+    [Header("Internal Data")]
     HashSet<string> Player = new HashSet<string>();
-
     HashSet<string> LegalOptions;
     List<string> IllegalOptions = new List<string>();
 
-    public GameLoss Loss;
-    public GameWin Win;
-    public CountDown CountDown;
-    GameLogging.Log Log;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -80,9 +85,10 @@ public class SetController : MonoBehaviour {
         } else {
             Log.ErrorsMade++;
             Debug.Log($"Illegal {PlayerInput.text}");
-            Loss.Show();
-            CountDown.StopTimer();
-            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
+            MDM.RegisterError();
+            //Loss.Show();
+            //CountDown.StopTimer();
+            //
         }
         float RNG = Random.value;
         if (RNG >= RobbieDifficulty) {
@@ -98,17 +104,26 @@ public class SetController : MonoBehaviour {
                 CountDown.StopTimer();
             }
         } else {
-            int RandomIndex = Random.Range(0, IllegalOptions.Count-1);
-            StartCoroutine(RobbieSpeaking(IllegalOptions.ElementAt(RandomIndex)));
-            Debug.Log($"Illegal {IllegalOptions.ElementAt(RandomIndex)}");
-            Win.Show();
-            CountDown.StopTimer();
-            Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
+            try {
+                int RandomIndex = Random.Range(0, IllegalOptions.Count-1);
+                StartCoroutine(RobbieSpeaking(IllegalOptions.ElementAt(RandomIndex)));
+                Debug.Log($"Illegal {IllegalOptions.ElementAt(RandomIndex)}");
+                Win.Show();
+                CountDown.StopTimer();
+                Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
+            } catch {
+                int RandomIndex = Random.Range(0, LegalOptions.Count - 1);
+                StartCoroutine(RobbieSpeaking(LegalOptions.ElementAt(RandomIndex)));
+                IllegalOptions.Add(LegalOptions.ElementAt(RandomIndex));
+                LegalOptions.Remove(LegalOptions.ElementAt(RandomIndex));
+                Debug.Log($"Legal {LegalOptions.ElementAt(RandomIndex)}");
+            }
         }
     }
 
     private void Update() {
-        if(Input.GetKey(KeyCode.Return) && RobbieFinished) {
+        if(Loss.isActiveAndEnabled) Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
+        if (Input.GetKey(KeyCode.Return) && RobbieFinished) {
             RobbieTalk.text = "";
             RobbieFinished = false;
             RobbieTalk.transform.parent.gameObject.SetActive(false);

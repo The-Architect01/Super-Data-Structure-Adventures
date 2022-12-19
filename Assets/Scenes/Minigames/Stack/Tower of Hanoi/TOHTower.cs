@@ -10,6 +10,7 @@ public class TOHTower : MonoBehaviour {
     public static int TurnsTaken = 0;
     public Text TurnsTakenDisplay;
     public GameWin WinGame;
+    public MinigameDifficultyModifier MDM;
 
     GameLogging.Log Log;
 
@@ -74,5 +75,6 @@ public class TOHTower : MonoBehaviour {
 
     void ShowError() {
         Debug.Log("Illegal");
+        MDM.RegisterError();
     }
 }
