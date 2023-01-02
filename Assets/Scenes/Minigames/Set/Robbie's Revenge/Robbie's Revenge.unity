@@ -617,7 +617,6 @@ GameObject:
   - component: {fileID: 381263426}
   - component: {fileID: 381263425}
   - component: {fileID: 381263428}
-  - component: {fileID: 381263429}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -688,7 +687,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &381263428
 MonoBehaviour:
@@ -723,23 +722,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &381263429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381263424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e97ee9189a251845ae80cd390c35b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DataStructureInfo: 'A data structure where you cannot have duplicate values. [i.e:
-    A set of numbers cannot have multiple slots with the #7]'
-  HowToPlay: Our good pal Robbie the robot will give you a topic, you must both list
-    off items that belong in that topic until one of you guesses wrong, or there
-    are no more items in the topic!
 --- !u!1 &428213764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1219,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &641859931
 GameObject:
@@ -1619,10 +1601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1669,7 +1651,7 @@ RectTransform:
   - {fileID: 1408163214}
   - {fileID: 429687938}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2240,10 +2222,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1618202455}
   - component: {fileID: 1618202454}
-  - component: {fileID: 1618202456}
   m_Layer: 0
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2260,11 +2241,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5f605090418874584c61a6b6c9e3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DataStructure: Set
+  Name: Robbie's Revenge
+  Data:
+    DataStructureInfo: Sets are a subtype of array. In these arrays, elements are
+      not allowed to be repeated, but can still be stored or accessed randomly.
+    HowToPlay: Our pal Robbie the robot has challenged you to a memory game. In this
+      game, both of you have to submit items that are a part of the category. There's
+      a twist though! Neither of you can repeat an already said item. Good luck!
+  GameWin: {fileID: 1016206985}
+  GameLoss: {fileID: 1964910773}
+  CountDown: {fileID: 1408163213}
+  MDM:
+    Timer: {fileID: 1408163213}
+    GameOver: {fileID: 1964910773}
+    Hearts:
+    - {fileID: 429687942}
+    - {fileID: 429687941}
+    - {fileID: 429687940}
+    - {fileID: 429687939}
   RobbieDifficulty: 0.25
   Loss: {fileID: 1964910773}
   Win: {fileID: 1016206985}
-  CountDown: {fileID: 1408163213}
-  MDM: {fileID: 1618202456}
   PlayerInput: {fileID: 1428419706}
   SetType: {fileID: 175868913}
   PlayerSet: {fileID: 1900763029}
@@ -2283,27 +2281,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1618202456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618202453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce08d70401ba9d943bbeb5a941f334b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Timer: {fileID: 1408163213}
-  GameOver: {fileID: 1964910773}
-  Hearts:
-  - {fileID: 429687942}
-  - {fileID: 429687941}
-  - {fileID: 429687940}
-  - {fileID: 429687939}
 --- !u!1001 &1737091880
 PrefabInstance:
   m_ObjectHideFlags: 0

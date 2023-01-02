@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
-public class MinigameDifficultyModifier : MonoBehaviour {
+[Serializable]
+public class MinigameDifficultyModifier {
 
     public Timer Timer;
-    public GameLoss GameOver;
     public Image[] Hearts = new Image[4];
     int DMG;
 
-    public void Start() {
+    public void OnStart() {
         Timer.Time = 120 - (30 * ((int)Zombie.Difficulty));
         float minutes = Mathf.FloorToInt(Timer.Time / 60);
         float seconds = Mathf.FloorToInt(Timer.Time % 60);
@@ -22,14 +23,16 @@ public class MinigameDifficultyModifier : MonoBehaviour {
             Hearts[i].enabled = false;
         DMG = (int)Zombie.Difficulty;
     }
-    public void Update() {
+    public void OnUpdate(Minigame me) {
         int i = 0;
         foreach (Image image in Hearts)
             if (!image.enabled) i++;
         if (i == Hearts.Length) {
-            GameOver.Message = "You Lost!";
-            GameOver.Show();
-            Timer.StopTimer();
+            me.Log.Win = false;
+            me.Save();
+            me.GameLoss.Message = "You Lost!";
+            me.GameLoss.Show();
+            me.CountDown.StopTimer();
         }
     }
 

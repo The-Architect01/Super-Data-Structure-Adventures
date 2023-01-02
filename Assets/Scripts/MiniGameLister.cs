@@ -221,9 +221,16 @@ public class MiniGameLister
         foreach(MGLScene s in scenes)
             if(s.type.Equals(sceneType))
             {
-                SceneManager.LoadScene(s.name, LoadSceneMode.Additive);
+                SceneManager.LoadScene(s.name);
+                //try {
+                //    MiniGameData md = GameObject.FindGameObjectWithTag("GameController").GetComponent<Minigame>().Data;
+                //    s.dataStructureInfo = md.DataStructureInfo;
+                //    s.howToPlay = md.HowToPlay;
+                //} catch { }
                 SceneManager.UnloadSceneAsync(s.name);
             }
+
+        SceneManager.LoadScene(0);
     }
 
     private int LookupScene(string sceneName)

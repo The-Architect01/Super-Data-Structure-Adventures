@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QueueHost : MonoBehaviour {
+public class QueueHost : Minigame {
 
+    [Header("Queue")]
     public List<QueueItem> Queue = new List<QueueItem>();
     public static int TurnsTaken = 0;
-    public GameWin WinGame;
     public Text Correct;
 
-    public MinigameDifficultyModifier MDM;
-    GameLogging.Log Log;
-
     private void Start() {
+        base.Start();
         Log = new GameLogging.Log() {
             IsPractice = Zombie.IsPractice,
             IsTeamGame = !Zombie.IsSolo,
@@ -90,8 +88,9 @@ Queue[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(
             Answer += item.GetComponent<Text>().text + "\n";
         }
         if(Answer.Replace("\n",string.Empty) == Correct.text.Replace("\n",string.Empty)) {
-            WinGame.Show();
-            Zombie.CurrentProfileStats.Stats["Queue"]["Manic Menus"].GameLog.Add(Log);
+            Win();
+            //WinGame.Show();
+            //Zombie.CurrentProfileStats.Stats["Queue"]["Manic Menus"].GameLog.Add(Log);
         }
     }
 
@@ -120,18 +119,6 @@ public static class Food {
         }
 
         return end;
-    }
-
-    //Allows an array to be shuffled.
-    public static void Shuffle<T>(this T[] list) {
-        int n = list.Length;
-        while (n > 1) {
-            n--;
-            int k = Random.Range(0, n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
-        }
     }
 
 }

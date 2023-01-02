@@ -1,9 +1,7 @@
-
 using UnityEngine;
 using System.Collections;
 
-public class QueueItem : MonoBehaviour
-{
+public class QueueItem : MonoBehaviour {
     public QueueHost Host;
     public bool IsSelectable;
 

@@ -1,20 +1,19 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 
-public class SetController : MonoBehaviour {
+public class SetController : Minigame {
 
     [Header("Engine Data")]
     public float RobbieDifficulty = .1f;
-    public GameLoss Loss;
+/*    public GameLoss Loss;
     public GameWin Win;
     public CountDown CountDown;
     GameLogging.Log Log;
-    public MinigameDifficultyModifier MDM;
+    public MinigameDifficultyModifier MDM;*/
 
     [Header("User Input")]
     public InputField PlayerInput;
@@ -32,10 +31,9 @@ public class SetController : MonoBehaviour {
     HashSet<string> LegalOptions;
     List<string> IllegalOptions = new List<string>();
 
-
-
     // Start is called before the first frame update
     void Start() {
+        base.Start();
         Log = new GameLogging.Log() {
             IsPractice = Zombie.IsPractice,
             IsTeamGame = !Zombie.IsSolo,
@@ -54,7 +52,7 @@ public class SetController : MonoBehaviour {
             PlayerMove();
         });
         PlayerInput.enabled = true;
-        Loss.Message = "That's Incorrect!";
+        GameLoss.Message = "That's Incorrect!";
     }
 
     void PlayerMove() {
@@ -100,7 +98,7 @@ public class SetController : MonoBehaviour {
                 Debug.Log($"Legal {LegalOptions.ElementAt(RandomIndex)}");
             } catch {
                 Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
-                Win.Show();
+                Win();
                 CountDown.StopTimer();
             }
         } else {
@@ -108,7 +106,7 @@ public class SetController : MonoBehaviour {
                 int RandomIndex = Random.Range(0, IllegalOptions.Count-1);
                 StartCoroutine(RobbieSpeaking(IllegalOptions.ElementAt(RandomIndex)));
                 Debug.Log($"Illegal {IllegalOptions.ElementAt(RandomIndex)}");
-                Win.Show();
+                Win();
                 CountDown.StopTimer();
                 Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
             } catch {
@@ -122,7 +120,7 @@ public class SetController : MonoBehaviour {
     }
 
     private void Update() {
-        if(Loss.isActiveAndEnabled) Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
+        if (GameLoss.isActiveAndEnabled) Lose();// Zombie.CurrentProfileStats.Stats["Set"]["Robbie's Revenge"].GameLog.Add(Log);
         if (Input.GetKey(KeyCode.Return) && RobbieFinished) {
             RobbieTalk.text = "";
             RobbieFinished = false;

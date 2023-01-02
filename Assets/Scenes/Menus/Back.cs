@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Back : MonoBehaviour {
-    
+
+    public string PreviousScene = "Main Menu";
+
     public void OnEnter() {
-        GetComponent<Text>().fontStyle = FontStyle.Italic;
+        GetComponentInChildren<Text>().fontStyle = FontStyle.Italic;
     }
 
     public void OnExit() {
-        GetComponent<Text>().fontStyle = FontStyle.Normal;
+        GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
     }
 
     public void OnClick() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(PreviousScene);
     }
 
 }

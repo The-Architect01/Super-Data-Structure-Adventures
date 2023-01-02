@@ -1,20 +1,17 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TOHTower : MonoBehaviour {
+public class TOHTower : Minigame {
 
     public List<TowerPart> Tower = new List<TowerPart>();
     public bool IsCorrect;
     public static int TurnsTaken = 0;
     public Text TurnsTakenDisplay;
     public GameWin WinGame;
-    public MinigameDifficultyModifier MDM;
-
-    GameLogging.Log Log;
 
     public void Start() {
+        base.Start();
         Log = new GameLogging.Log() {
             IsPractice = Zombie.IsPractice,
             IsTeamGame = !Zombie.IsSolo,

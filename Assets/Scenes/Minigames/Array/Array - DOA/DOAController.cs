@@ -4,14 +4,7 @@ using UnityEngine;
 using GameLogging;
 using UnityEngine.UI;
 
-public class DOAController : MonoBehaviour {
-
-    [Header("Engine Controllers")]
-    public GameWin GameWin;
-    public GameLoss GameLoss;
-    public CountDown CountDown;
-    public MinigameDifficultyModifier MDM;
-    Log Log;
+public class DOAController : Minigame {
 
     [Header("Game Input")]
     public InputField Row;
@@ -29,6 +22,7 @@ public class DOAController : MonoBehaviour {
     Queue<int> NumberQueue = new Queue<int>();
 
     private void Awake() {
+        base.Awake();
         Row.Select();
         Log = new Log() {
             IsPractice = Zombie.IsPractice,
@@ -69,6 +63,7 @@ public class DOAController : MonoBehaviour {
         if (GameLoss.gameObject.activeInHierarchy) { 
             Log.Win = false;
             Log.TimeTaken = CountDown.TimeElapsed;
+            Zombie.CurrentProfileStats.Stats["Array"]["Arrays Attack"].GameLog.Add(Log);
         } else if (GameWin.gameObject.activeInHierarchy) { 
             Log.Win = true;
             Log.TimeTaken = CountDown.TimeElapsed;

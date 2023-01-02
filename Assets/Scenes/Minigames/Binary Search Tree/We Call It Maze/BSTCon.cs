@@ -1,22 +1,19 @@
-
 using BinaryTree;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class BSTCon : MonoBehaviour {
+public class BSTCon : Minigame {
 
     public Text LeftText;
     public Text RightText;
     public Text CurrentText;
     public Text GoalText;
     public Text MovesUsed;
-    public GameWin GameWin;
     public static BinaryTree<string> BinTree;
     public static string Goal;
     public CountDown Timer;
-    public MinigameDifficultyModifier MDM;
 
     static int _moves;
     int Moves { get { return _moves; } set { _moves = value; MovesUsed.text = $"Moves Used: {value}"; } }
@@ -24,9 +21,9 @@ public class BSTCon : MonoBehaviour {
     public static Node<string> CurrentNode = null;
 
     public Direction Direction;
-    GameLogging.Log Log;
 
     private void Start() {
+        base.Start();
         Log = new GameLogging.Log() {
             IsPractice = Zombie.IsPractice,
             IsTeamGame = !Zombie.IsSolo,
@@ -61,7 +58,6 @@ public class BSTCon : MonoBehaviour {
         try { LeftText.text = BinTree.Root.Left.Data.ToString(); } catch { LeftText.text = ""; }
         try { RightText.text = BinTree.Root.Right.Data.ToString(); } catch { RightText.text = ""; }
         CurrentNode = BinTree.Root;
-        Debug.Log(BinTree);
     }
 
     public void OnEnter() {
@@ -76,41 +72,73 @@ public class BSTCon : MonoBehaviour {
         Moves++;
         Log.TurnsUsed++;
         if (Direction == Direction.Right) {
-            if(RightText.text == Goal.ToString()) { 
-                Debug.Log("Correct Right"); 
-                GameWin.Show();
-                Log.TimeTaken = Timer.TimeElapsed;
-                Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+            if(RightText.text == Goal.ToString()) {
+                //GameWin.Show();
+                //Log.TimeTaken = Timer.TimeElapsed;
+                //Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+                Win();
                 return;
             }
+#if !UNITY_WEBGL
             if (CurrentNode.Right != null)
+#else
+            try {
+            if (CurrentNode.Right.Data != "")
+#endif 
                 CurrentNode = CurrentNode.Right;
             else
                 MDM.RegisterError();
+#if UNITY_WEBGL
+            } catch {
+                MDM.RegisterError();
+            }
+#endif
+
         } else if(Direction == Direction.Left) {
             if (LeftText.text == Goal.ToString()) {
-                Debug.Log("Correct Left"); 
-                GameWin.Show();
-                Log.TimeTaken = Timer.TimeElapsed;
-                Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+                //GameWin.Show();
+                //Log.TimeTaken = Timer.TimeElapsed;
+                //Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+                Win();
                 return;
             }
+#if !UNITY_WEBGL
             if (CurrentNode.Left != null)
+#else
+            try {
+            if (CurrentNode.Left.Data != "")
+#endif                
                 CurrentNode = CurrentNode.Left;
             else
                 MDM.RegisterError();
+#if UNITY_WEBGL
+            } catch {
+                MDM.RegisterError();
+            }
+#endif
+
         } else if(Direction == Direction.Center) {
-            if (CurrentText.text == Goal.ToString()) { 
-                Debug.Log("Correct Center"); 
-                GameWin.Show();
-                Log.TimeTaken = Timer.TimeElapsed;
-                Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+            if (CurrentText.text == Goal.ToString()) {
+                //GameWin.Show();
+                //Log.TimeTaken = Timer.TimeElapsed;
+                //Zombie.CurrentProfileStats.Stats["Binary Search Tree"]["We Call It Maze"].GameLog.Add(Log);
+                Win();
                 return; 
             }
-            if (CurrentNode.Parent != null) 
+#if !UNITY_WEBGL
+            if (CurrentNode.Parent != null)
+#else
+            try {
+            if (CurrentNode.Parent.Data != "")
+#endif
                 CurrentNode = CurrentNode.Parent;
             else
                 MDM.RegisterError();
+#if UNITY_WEBGL
+            } catch {
+                MDM.RegisterError();
+            }
+#endif 
         }
         CurrentText.text = CurrentNode.Data.ToString();
         try {
@@ -119,7 +147,6 @@ public class BSTCon : MonoBehaviour {
         try {
             RightText.text = CurrentNode.Right.Data.ToString();
         }catch { RightText.text = ""; }
-        Debug.Log("Clicked");
     }
 }
 namespace BinaryTree {
@@ -128,7 +155,7 @@ namespace BinaryTree {
 
     public class Node<T> where T : System.IComparable<T> {
         public T Data { get; set; }
-        public int numberLength { get; set; }
+        public int NumberLength { get; set; }
         public Node<T> Left { get; set; }
         public Node<T> Right { get; set; }
         public Node<T> Parent { get; set; } = null;
@@ -138,8 +165,8 @@ namespace BinaryTree {
         }
 
         public int CompareTo(Node<T> other) {
-            if(numberLength != other.numberLength)
-                return numberLength - other.numberLength;
+            if(NumberLength != other.NumberLength)
+                return NumberLength - other.NumberLength;
             else
                 return Data.CompareTo(other.Data);
         }
@@ -149,7 +176,7 @@ namespace BinaryTree {
             this.Left = Left;
             this.Right = Right;
             this.Parent = Parent;
-            this.numberLength = numberLength;
+            this.NumberLength = numberLength;
         }
     }
 
