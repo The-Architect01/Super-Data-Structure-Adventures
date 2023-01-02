@@ -10,10 +10,14 @@ using GameLogging;
 public class PlayerStats {
 
     public Dictionary<string, Dictionary<string, Stat>> Stats { get; private set; }
+    public float OSTVolume { get; set; } = .8f;
+    public float SFXVolume { get; set; } = .8f;
 
     public PlayerStats() {
         try {
             Stats = PlayerIO.LoadData().Stats;
+            OSTVolume = PlayerIO.LoadData().OSTVolume;
+            SFXVolume = PlayerIO.LoadData().SFXVolume;
             Debug.Log("Player history detected");
         } catch (NoSaveFileException) {
             MiniGameLister MGL = Zombie.MiniGameList;
@@ -36,12 +40,12 @@ public class PlayerStats {
 public class Stat {
 
     public float BestTime { get; set; } = 0;
-    public long BestScore { get; set; } = 0;
-    public long GamesPlayed { get; set; } = 0;
-    public long GamesWon { get; set; } = 0;
-    public long GamesLost { get; set; } = 0;
-    public long TimesPracticed { get; set; } = 0;
-    public long TimesPlayed { get; set; } = 0;
+    public float BestScore { get; set; } = 0;
+    public int GamesPlayed { get; set; } = 0;
+    public int GamesWon { get; set; } = 0;
+    public int GamesLost { get; set; } = 0;
+    public int TimesPracticed { get; set; } = 0;
+    public int TimesPlayed { get; set; } = 0;
 
     /// <summary>A Log of Games Played</summary>
     public GameLogs GameLog { get; } = new GameLogs();
@@ -74,9 +78,11 @@ namespace GameLogging {
 
     [Serializable]
     public class Log {
-        public long TurnsUsed { get; set; } = -1;
-        public long ErrorsMade { get; set; } = -1;
-        public long Score { get; set; } = -1;
+
+        public DateTime Date { get; set; }
+        public int TurnsUsed { get; set; } = -1;
+        public int ErrorsMade { get; set; } = 0;
+        public float Score { get; set; } = -1;
         public float TimeTaken { get; set; } = -1;
         public bool IsTeamGame { get; set; } = false;
         public bool IsPractice { get; set; } = false;
@@ -92,20 +98,50 @@ public static class PlayerIO {
 
     private static readonly string Path = Application.persistentDataPath + "/History.survive";
     private static readonly BinaryFormatter Serializer = new BinaryFormatter();
+    private static readonly string PathExport = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Super Data Structure Adventure Stats.csv";
+
 
     public static void SaveData(PlayerStats player) {
         using FileStream file = new FileStream(Path, FileMode.Create);
         Serializer.Serialize(file, player);
     }
 
-    public static PlayerStats LoadData() { 
+    public static PlayerStats LoadData() {
         if (File.Exists(Path)) {
-            using FileStream file = new FileStream(Path, FileMode.Open);
-            return Serializer.Deserialize(file) as PlayerStats;
+            try {
+                using FileStream file = new FileStream(Path, FileMode.Open);
+                return Serializer.Deserialize(file) as PlayerStats;
+            } catch {
+                throw new NoSaveFileException();
+            }
         } else {
             Debug.Log("File was not found " + Path);
             throw new NoSaveFileException();
         }
+    }
+
+    public static void ExportData(PlayerStats Player) {
+        if (File.Exists(PathExport)) { File.SetAttributes(PathExport, File.GetAttributes(PathExport) & ~FileAttributes.ReadOnly); }
+        using FileStream file = new FileStream(PathExport, FileMode.Create, FileAccess.ReadWrite, FileShare.None);
+        string ser = "Key\n";
+        ser += "Category Name\n";
+        ser += "Game Name\n";
+        ser += "Times Played,Games Won,Games Lost,Best Time,Best Score,Times Practiced\n";
+        ser += "{Individual Logs}\n";
+        ser += "Practice Game,Online Game,Win,Score,Time Taken, Turns Used, Errors Made, Difficulty\n\n";
+        foreach (string s in Player.Stats.Keys) {
+            ser += $"\n{s}\n";
+            foreach (string g in Player.Stats[s].Keys) {
+                ser += $"\n{g}\n{Player.Stats[s][g].TimesPlayed},{Player.Stats[s][g].GamesWon},{Player.Stats[s][g].GamesLost},{Player.Stats[s][g].BestTime}," +
+                    $"{Player.Stats[s][g].BestScore},{Player.Stats[s][g].TimesPracticed}\n{{Individual Logs}}\n";
+                foreach(Log log in Player.Stats[s][g].GameLog) {
+                    ser += $"{log.IsPractice},{log.IsTeamGame},{log.Win},{log.Score},{log.TimeTaken},{log.TurnsUsed},{log.ErrorsMade},{log.Difficulty}\n";
+                }
+            }
+        }
+        byte[] data = new System.Text.UTF8Encoding(true).GetBytes(ser);
+        file.Write(data, 0, data.Length);
+        File.SetAttributes(PathExport, FileAttributes.ReadOnly);
     }
 }
 class NoSaveFileException : Exception { }
