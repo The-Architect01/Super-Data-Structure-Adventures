@@ -9,6 +9,11 @@ public class UIController : MonoBehaviour {
     public GameObject PlayMenu;
     public GameObject SettingsMenu;
 
+    private void Awake() {
+        SettingsMenu.GetComponent<SettingsMenu>().Start();
+        SettingsMenu.SetActive(false);
+    }
+
     public void OnPlay() {
         SettingsMenu.SetActive(false);
         PlayMenu.SetActive(true);
@@ -22,6 +27,14 @@ public class UIController : MonoBehaviour {
         SettingsMenu.SetActive(true);
         PlayMenu.SetActive(false);
     }
+
+#if UNITY_WEBGL
+    public GameObject QuitButton;
+    public void Start() {
+        QuitButton.SetActive(false);
+        this.transform.Translate(0, -55, 0);
+    }
+#endif
 
     public void OnQuit() {
 #if UNITY_EDITOR
